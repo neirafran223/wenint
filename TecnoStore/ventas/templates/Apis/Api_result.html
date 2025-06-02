@@ -1,11 +1,18 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Resultados de la API</h1>
-<ul>
+{% extends 'ventas/base.html' %}
+{% block contenido %}
+<h1 class="text-white mb-4">Resultados de la API</h1>
+{% if data %}
+<div class="list-group">
     {% for item in data %}
-        <li><strong>{{ item.title }}</strong>: {{ item.body }}</li>
-    {% empty %}
-        <li>No hay datos disponibles.</li>
+        <div class="list-group-item list-group-item-action bg-dark text-white border-secondary mb-2 rounded">
+            <h5 class="mb-1 text-primary"><strong>{{ item.title }}</strong></h5>
+            <p class="mb-1">{{ item.body }}</p>
+        </div>
     {% endfor %}
-</ul>
+</div>
+{% else %}
+    <div class="alert alert-warning" role="alert">
+        No hay datos disponibles.
+    </div>
+{% endif %}
 {% endblock %}

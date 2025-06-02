@@ -1,5 +1,9 @@
 from django.urls import path, include
-from .views import home, galeria, base, listar_productos, registro, modificar_producto, eliminar_edicion, agregar_productos,ProductoViewSet, CarritoViewSet, BoletaViewSet, OrdenDespachoViewSet, ItemCarritoViewSet
+from .views import (
+    home, galeria, base, listar_productos, registro, modificar_producto, 
+    eliminar_edicion, agregar_productos, carrito, detalle_producto, agregar_al_carrito, # <-- ¡Asegúrate de agregar las nuevas vistas aquí!
+    ProductoViewSet, CarritoViewSet, BoletaViewSet, OrdenDespachoViewSet, ItemCarritoViewSet
+)
 from rest_framework.routers import DefaultRouter
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -36,6 +40,9 @@ urlpatterns = [
     path('listar_productos/', listar_productos, name='listar_productos'),
     path('modificar_producto/<int:producto_id>/', modificar_producto, name='modificar_producto'),
     path('eliminar_edicion/<int:producto_id>/', eliminar_edicion, name='eliminar_edicion'),
+    path('carrito/', carrito, name='carrito'),
+    path('producto/<int:producto_id>/', detalle_producto, name='detalle_producto'), # <-- ¡Nueva URL para detalle de producto!
+    path('agregar_al_carrito/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'), # <-- ¡Nueva URL para agregar al carrito!
     # Rutas de API REST
     path('api/', include(router.urls)),
     
@@ -45,4 +52,3 @@ urlpatterns += [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
-

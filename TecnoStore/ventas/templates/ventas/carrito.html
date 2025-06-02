@@ -1,0 +1,100 @@
+{% extends 'ventas/base.html' %}
+{% load static %}
+{% load humanize %} {# Necesario si vas a usar el filtro 'intcomma' para formatear números #}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="text-white mb-4 text-center">Tu Carrito de Compras</h1>
+
+    {# Mensaje de carrito vacío por defecto. Puedes usarlo con lógica Django #}
+    {% comment %}
+    {% if not items_en_carrito %}
+        <div class="alert alert-info text-center" role="alert">
+            ¡Tu carrito está vacío! <a href="{% url 'home' %}" class="alert-link">Explora nuestros productos</a> para empezar a añadir cosas.
+        </div>
+    {% endif %}
+    {% endcomment %}
+
+    <div class="alert alert-info text-center" role="alert">
+        Tu carrito está vacío. ¡Empieza a añadir productos!
+    </div>
+
+    {# Ejemplo de cómo podrías mostrar los items del carrito con lógica de Django #}
+    {% comment %}
+    {% if items_en_carrito %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Imagen</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items_en_carrito %}
+                    <tr>
+                        <td>{{ item.producto.nombre }}</td>
+                        <td>
+                            {% if item.producto.imagen %}
+                                <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="img-thumbnail" style="width: 80px; height: auto;">
+                            {% else %}
+                                No imagen
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form action="{% url 'actualizar_cantidad_carrito' item.id %}" method="post" class="d-flex">
+                                {% csrf_token %}
+                                <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="form-control form-control-sm w-auto me-2">
+                                <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>${{ item.producto.precio|intcomma }}</td>
+                        <td>${{ item.cantidad|mul:item.producto.precio|intcomma }}</td> {# Calcula el subtotal #}
+                        <td>
+                            <a href="{% url 'eliminar_item_carrito' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-end align-items-center mt-4 p-3 bg-secondary rounded text-white">
+            <h4 class="mb-0 me-3">Total del Carrito:</h4>
+            <h3 class="mb-0 text-success">${{ total_carrito|intcomma }}</h3> {# total_carrito debería ser pasado desde la vista #}
+            <a href="{% url 'proceder_al_pago' %}" class="btn btn-success btn-lg ms-4">Proceder al Pago</a>
+        </div>
+
+    {% else %}
+        {# Este bloque de "else" se duplica con el alert de arriba, puedes elegir cuál usar #}
+    {% endif %}
+    {% endcomment %}
+
+    <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+        <div class="col">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Explorar Productos</h5>
+                    <p class="card-text">Descubre la variedad de tecnología que tenemos para ti.</p>
+                    <a href="{% url 'home' %}" class="btn btn-outline-light">Ir a la tienda</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Ver Compras Anteriores</h5>
+                    <p class="card-text">Revisa el historial de tus pedidos y facturas.</p>
+                    {# Asumiendo que tienes una URL para el historial de compras #}
+                    <a href="#" class="btn btn-outline-info">Historial</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

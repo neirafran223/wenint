@@ -1,8 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
+/* Considera si estos estilos son necesarios si Bootstrap ya maneja el body */
 body {
   background-color: #1a1a1a; /* Changed to dark grey */
   font-family: "Open Sans", sans-serif;
@@ -11,114 +7,48 @@ body {
   animation: fadeIn 1s ease-in-out forwards; /* Animación de aparecer */
 }
 
-header {
-  width: 100%;
-  height: 80px;
-  background-color: #282828; /* Changed to a slightly lighter dark grey */
-  display: flex;
-}
-
-header > div {
-  width: 50%;
-}
-
-.galeria {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 30px;
-}
-
-.galeria img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
+/* Inputs, selects, textareas - Usar las clases .form-control de Bootstrap */
 input[type="text"],
 input[type="email"],
 select,
 textarea {
-  width: 100%;
+  /* width: 100%; - Ya lo maneja .form-control */
   padding: 5px 10px;
-  background-color: #333333; /* Darker input background */
-  color: #f5f5f5; /* Light text for inputs */
-  border: 1px solid #4a4a4a; /* Dark border */
+  background-color: #333333; /* Mantener para coherencia con el tema oscuro */
+  color: #f5f5f5; /* Mantener para coherencia con el tema oscuro */
+  border: 1px solid #4a4a4a; /* Mantener para coherencia con el tema oscuro */
 }
 
-.button {
-  padding: 5px 10px;
-  border: none;
-  color: #f5f5f5; /* Light text for buttons */
-  border-radius: 5px;
-}
 
-.button.primary {
-  background-color: #4a4a4a; /* Dark grey for primary button */
-}
-
-.button.secondary {
-  background-color: #6c757d; /* Keep Bootstrap's secondary color or adjust to a darker grey */
-}
-
-.contenedor_logo {
-  display: flex;
-  align-items: center;
-}
-
+/* Logo - El estilo de imagen se mantiene */
 .logo {
   width: 100px;
   margin-left: 20px;
-  transition: filter 0.3s ease-in-out; /* Transición para el efecto de brillo */
+  transition: filter 0.3s ease-in-out;
 }
 
 .logo:hover {
-  filter: brightness(1.2); /* Efecto de brillo al pasar el ratón */
+  filter: brightness(1.2);
 }
 
-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-}
-
-nav > ul {
-  margin-right: 20px;
-}
-
-nav > ul > li {
-  display: inline;
-  margin-left: 10px;
-}
 
 nav > ul > li > a {
-  color: #f5f5f5; /* Light text for navigation links */
+  color: #f5f5f5; /* Mantener para los enlaces de navegación */
   text-decoration: none;
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transición para enlaces */
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 nav > ul > li > a:hover {
-  color: #888888; /* Color de acento al pasar el ratón */
-  transform: translateY(-2px); /* Pequeño desplazamiento hacia arriba */
+  color: #888888;
+  transform: translateY(-2px);
 }
 
-#contenido {
-  width: 80%;
-  margin: auto;
-  max-width: 1280px;
-  min-height: 80vh;
-}
 
-.productos {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-/* estilos formulario agregar */
+/* Formulario agregar - Usar clases de Bootstrap para cards y formularios */
 .formulario-producto {
-  background-color: #282828; /* Fondo más oscuro para el formulario */
+  background-color: #282828;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra más oscura */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 25px;
   margin-top: 30px;
 }
@@ -126,17 +56,17 @@ nav > ul > li > a:hover {
 .formulario-producto h2 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #f5f5f5; /* Texto claro para el encabezado del formulario */
+  color: #f5f5f5;
 }
 
 .formulario-producto hr {
-  border-top: 2px solid #4a4a4a; /* Borde gris oscuro */
+  border-top: 2px solid #4a4a4a;
   opacity: 0.5;
   margin-bottom: 20px;
 }
 
 .formulario-producto .btn-primary {
-  background-color: #4a4a4a; /* Gris oscuro para el botón primario */
+  background-color: #4a4a4a;
   border: none;
   padding: 8px 16px;
   font-weight: 500;
@@ -144,11 +74,11 @@ nav > ul > li > a:hover {
 }
 
 .formulario-producto .btn-primary:hover {
-  background-color: #6a6a6a; /* Lighter dark grey on hover */
+  background-color: #6a6a6a;
 }
 
 .formulario-producto .btn-secondary {
-  background-color: #6c757d; /* Keep Bootstrap's secondary color or adjust to a darker grey */
+  background-color: #6c757d;
   border: none;
   padding: 8px 16px;
 }
@@ -157,19 +87,18 @@ nav > ul > li > a:hover {
   background-color: #5a6268;
 }
 
+/* Animaciones - Mantener las animaciones si son deseables */
 @keyframes animacion_producto_desktop {
   0% {
     transform: rotate(-20deg);
     opacity: 0;
   }
-
   100% {
     transform: rotate(0);
     opacity: 1;
   }
 }
 
-/* Animación de aparecer para todo el body */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -180,7 +109,7 @@ nav > ul > li > a:hover {
 }
 
 .productos .producto {
-  width: 25%;
+  /* width: 25%; - Reemplazado por col-* */
   margin-top: 15px;
   animation: animacion_producto_desktop 0.5s;
 }
@@ -192,7 +121,7 @@ nav > ul > li > a:hover {
 }
 
 .productos .producto .contenedor_producto {
-  background-color: #282828; /* Darker background for product container */
+  background-color: #282828;
   width: 80%;
   margin: auto;
 }
@@ -201,33 +130,10 @@ nav > ul > li > a:hover {
   padding: 5px;
 }
 
-/*FOOTER*/
-
-footer {
-  width: 100%;
-  height: 300px;
-  background-color: #282828; /* Darker footer background */
-}
-
-footer .marcas {
-  width: 100%;
-  height: 100px;
-  background-color: #4a4a4a; /* Darker brand background */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 footer .marcas img {
   width: 50px;
 }
 
-footer .logo_footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 100px);
-}
 
 footer .logo_footer img {
   width: 100px;
@@ -238,109 +144,63 @@ footer .logo_footer img {
   position: absolute;
   left: 10px;
   top: 10px;
-  display: none;
 }
 
+/* Validaciones de JQuery Validate - Mantener */
 label.error {
-  color: #ff6b6b; /* A more visible error color on dark background */
+  color: #ff6b6b;
 }
 
 input.error {
-  border: 2px solid #ff6b6b; /* A more visible error border on dark background */
+  border: 2px solid #ff6b6b;
 }
 
-/*MEDIA QUERIES*/
-
-/*TABLET*/
-
+/*MEDIA QUERIES - Muchos de estos se pueden manejar con clases de Bootstrap */
+/* TABLET */
 @media (max-width: 1024px) {
-  .galeria {
-    grid-template-columns: 1fr 1fr;
-  }
 
   @keyframes animacion_producto_tablet {
     0% {
-      opacity: 0; /*0-1*/
+      opacity: 0;
     }
-
     100% {
       opacity: 1;
     }
   }
 
   .productos .producto {
-    width: 50%;
     animation: animacion_producto_tablet 2s;
   }
 }
 
-/*SMARTPHONE*/
+/* SMARTPHONE */
 @media (max-width: 480px) {
-  .galeria {
-    grid-template-columns: 1fr;
-  }
-
-  .menu {
-    display: block;
-  }
 
   @keyframes animacion_producto_smartphone {
     0% {
-      transform: scale(0.1); /*0 - 1*/
+      transform: scale(0.1);
     }
-
     80% {
       transform: scale(1.05);
     }
-
     100% {
       transform: scale(1);
     }
   }
 
   .productos .producto {
-    width: 100%;
     animation: animacion_producto_smartphone 0.8s;
   }
 
   header {
-    flex-direction: column;
-    height: 60px;
     transition: all 0.8s;
-    /*position: fixed;
-        left:0;
-        top:0;*/
-    overflow: hidden;
   }
 
   #contenido {
     margin-top: 60px;
   }
 
-  header > div {
-    width: 100%;
-  }
-
-  nav {
-    justify-content: center;
-  }
-
-  .contenedor_logo {
-    justify-content: center;
-  }
-
   .logo {
     margin-top: 15px;
-  }
-
-  nav > ul {
-    margin-right: 0;
-  }
-
-  nav > ul > li {
-    display: block;
-    margin: 0;
-    text-align: center;
-    padding: 20px 0;
   }
 }
