@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Resultados de la API</h1>
+<ul>
+    {% for item in data %}
+        <li><strong>{{ item.title }}</strong>: {{ item.body }}</li>
+    {% empty %}
+        <li>No hay datos disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,346 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a1a1a; /* Changed to dark grey */
+  font-family: "Open Sans", sans-serif;
+  color: #e0e0e0; /* Changed text color to light grey */
+  opacity: 0; /* Inicialmente oculto para la animación de carga */
+  animation: fadeIn 1s ease-in-out forwards; /* Animación de aparecer */
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  background-color: #282828; /* Changed to a slightly lighter dark grey */
+  display: flex;
+}
+
+header > div {
+  width: 50%;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.galeria img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #333333; /* Darker input background */
+  color: #f5f5f5; /* Light text for inputs */
+  border: 1px solid #4a4a4a; /* Dark border */
+}
+
+.button {
+  padding: 5px 10px;
+  border: none;
+  color: #f5f5f5; /* Light text for buttons */
+  border-radius: 5px;
+}
+
+.button.primary {
+  background-color: #4a4a4a; /* Dark grey for primary button */
+}
+
+.button.secondary {
+  background-color: #6c757d; /* Keep Bootstrap's secondary color or adjust to a darker grey */
+}
+
+.contenedor_logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  margin-left: 20px;
+  transition: filter 0.3s ease-in-out; /* Transición para el efecto de brillo */
+}
+
+.logo:hover {
+  filter: brightness(1.2); /* Efecto de brillo al pasar el ratón */
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+nav > ul {
+  margin-right: 20px;
+}
+
+nav > ul > li {
+  display: inline;
+  margin-left: 10px;
+}
+
+nav > ul > li > a {
+  color: #f5f5f5; /* Light text for navigation links */
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transición para enlaces */
+}
+
+nav > ul > li > a:hover {
+  color: #888888; /* Color de acento al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño desplazamiento hacia arriba */
+}
+
+#contenido {
+  width: 80%;
+  margin: auto;
+  max-width: 1280px;
+  min-height: 80vh;
+}
+
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* estilos formulario agregar */
+.formulario-producto {
+  background-color: #282828; /* Fondo más oscuro para el formulario */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra más oscura */
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.formulario-producto h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f5f5f5; /* Texto claro para el encabezado del formulario */
+}
+
+.formulario-producto hr {
+  border-top: 2px solid #4a4a4a; /* Borde gris oscuro */
+  opacity: 0.5;
+  margin-bottom: 20px;
+}
+
+.formulario-producto .btn-primary {
+  background-color: #4a4a4a; /* Gris oscuro para el botón primario */
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-producto .btn-primary:hover {
+  background-color: #6a6a6a; /* Lighter dark grey on hover */
+}
+
+.formulario-producto .btn-secondary {
+  background-color: #6c757d; /* Keep Bootstrap's secondary color or adjust to a darker grey */
+  border: none;
+  padding: 8px 16px;
+}
+
+.formulario-producto input[type="reset"]:hover {
+  background-color: #5a6268;
+}
+
+@keyframes animacion_producto_desktop {
+  0% {
+    transform: rotate(-20deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+/* Animación de aparecer para todo el body */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.productos .producto {
+  width: 25%;
+  margin-top: 15px;
+  animation: animacion_producto_desktop 0.5s;
+}
+
+.productos .producto img {
+  width: 80%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.productos .producto .contenedor_producto {
+  background-color: #282828; /* Darker background for product container */
+  width: 80%;
+  margin: auto;
+}
+
+.productos .producto .detalles {
+  padding: 5px;
+}
+
+/*FOOTER*/
+
+footer {
+  width: 100%;
+  height: 300px;
+  background-color: #282828; /* Darker footer background */
+}
+
+footer .marcas {
+  width: 100%;
+  height: 100px;
+  background-color: #4a4a4a; /* Darker brand background */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer .marcas img {
+  width: 50px;
+}
+
+footer .logo_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 100px);
+}
+
+footer .logo_footer img {
+  width: 100px;
+}
+
+.menu {
+  width: 40px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: none;
+}
+
+label.error {
+  color: #ff6b6b; /* A more visible error color on dark background */
+}
+
+input.error {
+  border: 2px solid #ff6b6b; /* A more visible error border on dark background */
+}
+
+/*MEDIA QUERIES*/
+
+/*TABLET*/
+
+@media (max-width: 1024px) {
+  .galeria {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @keyframes animacion_producto_tablet {
+    0% {
+      opacity: 0; /*0-1*/
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .productos .producto {
+    width: 50%;
+    animation: animacion_producto_tablet 2s;
+  }
+}
+
+/*SMARTPHONE*/
+@media (max-width: 480px) {
+  .galeria {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    display: block;
+  }
+
+  @keyframes animacion_producto_smartphone {
+    0% {
+      transform: scale(0.1); /*0 - 1*/
+    }
+
+    80% {
+      transform: scale(1.05);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .productos .producto {
+    width: 100%;
+    animation: animacion_producto_smartphone 0.8s;
+  }
+
+  header {
+    flex-direction: column;
+    height: 60px;
+    transition: all 0.8s;
+    /*position: fixed;
+        left:0;
+        top:0;*/
+    overflow: hidden;
+  }
+
+  #contenido {
+    margin-top: 60px;
+  }
+
+  header > div {
+    width: 100%;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .contenedor_logo {
+    justify-content: center;
+  }
+
+  .logo {
+    margin-top: 15px;
+  }
+
+  nav > ul {
+    margin-right: 0;
+  }
+
+  nav > ul > li {
+    display: block;
+    margin: 0;
+    text-align: center;
+    padding: 20px 0;
+  }
+}
