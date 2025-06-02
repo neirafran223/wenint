@@ -1,74 +1,39 @@
-{% extends 'ventas/base.html' %} 
-{% load static %} 
-{% load humanize %} 
+{% extends 'ventas/base.html' %}
+{% load static %}
+{% load humanize %}
 
 {% block contenido %}
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
+<div class="scroll-carousel-container container py-5"> {# Añadido container y padding de Bootstrap #}
+  <h2 class="text-white text-center mb-4">Nuestros Productos Destacados</h2>
+  <div class="scroll-carousel-viewport">
     {% for p in productos %}
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="{{ forloop.counter0 }}"
-      {%
-      if
-      forloop.first
-      %}class="active"
-      aria-current="true"
-      {%
-      endif
-      %}
-      aria-label="Slide {{ forloop.counter }}"
-    ></button>
-    {% endfor %}
-  </div>
-  <div class="carousel-inner">
-    {% for p in productos %}
-    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-      <div class="d-flex justify-content-center align-items-center bg-dark" style="height: 450px;">
+    <div class="scroll-carousel-item" id="producto-scroll-{{ forloop.counter0 }}">
+      <div class="product-image-scroll-wrapper bg-dark">
         {% if p.imagen %}
-        <img
-          src="{{ p.imagen.url }}"
-          class="d-block w-75 h-75 object-fit-contain"
-          alt="{{ p.nombre }}"
-        />
+        <img src="{{ p.imagen.url }}" 
+             class="product-image-scroll"
+             alt="{{ p.nombre }}">
         {% else %}
-        <p class="text-white">Imagen no disponible</p>
+        <div class="product-image-scroll-placeholder">
+            <p class="text-white mb-0">Imagen no disponible</p>
+        </div>
         {% endif %}
       </div>
-      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
-        <h5 class="text-white">{{ p.nombre | title }}</h5>
-        <p class="text-white">${{ p.precio | intcomma }}</p>
-        <a href="{% url 'detalle_producto' p.id %}" class="btn btn-primary">Ver Producto</a> {# <-- Enlace modificado aquí #}
+      <div class="product-info-scroll p-3">
+        <h5 class="text-white product-name-scroll mb-2">{{ p.nombre | title }}</h5>
+        <p class="text-white product-price-scroll mb-3">${{ p.precio | intcomma }}</p>
+        <a href="{% url 'detalle_producto' p.id %}" class="btn btn-primary btn-sm mt-auto">Ver Producto</a>
       </div>
     </div>
     {% empty %}
-    <div class="carousel-item active">
-      <div class="d-flex justify-content-center align-items-center bg-dark" style="height: 450px;">
+    <div class="scroll-carousel-item-empty">
+      <div class="d-flex justify-content-center align-items-center" style="height: 450px; width:100%;">
         <p class="text-white">
-          No hay productos disponibles para mostrar en el carrusel.
+          No hay productos disponibles para mostrar.
         </p>
       </div>
     </div>
     {% endfor %}
   </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExampleIndicators"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExampleIndicators"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
 {% endblock %}

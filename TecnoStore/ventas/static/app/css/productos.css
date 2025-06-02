@@ -1,8 +1,10 @@
+/* Tus estilos existentes para .productos, .title-cards, .card, .card-body, etc. Van aquí arriba */
+/* Por ejemplo: */
 .productos {
   text-align: center;
   justify-content: center;
-  display: flex; /* Puede ser reemplazado por .row y d-flex en el HTML */
-  flex-wrap: wrap; /* Puede ser reemplazado por .row y flex-wrap en el HTML */
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .title-cards {
@@ -15,16 +17,17 @@
 }
 
 .card {
+  /* Estos son para tus tarjetas de producto, no para el nuevo carrusel */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  width: 100%; /* Ahora se maneja con .col-* */
-  margin: 10px; /* Ahora se maneja con .g-* (gap) */
+  /* width: 100%; -- Bootstrap .col-* maneja esto */
+  /* margin: 10px; -- Bootstrap .g-* (gap) maneja esto */
   text-align: center;
   position: relative;
-  background-color: #282828; /* Mantener para tu tema oscuro */
-  border: 1px solid #4a4a4a; /* Mantener para tu tema oscuro */
+  background-color: #282828;
+  border: 1px solid #4a4a4a;
 }
 
 .card-body {
@@ -49,195 +52,265 @@
   color: #f5f5f5;
 }
 
-.card .card-body h5 {
-  font-size: 1rem;
-  color: #e0e0e0;
-  margin-bottom: 10px;
+/* ... (otros estilos de .card que tengas) ... */
+
+/* ------------------------------------------------------------------------- */
+/* --- ELIMINA O COMENTA LOS ESTILOS DEL CARRUSEL DE BOOTSTRAP ANTERIOR --- */
+/* ------------------------------------------------------------------------- */
+
+/* Por ejemplo, comenta o elimina todas estas reglas si aún existen de versiones anteriores:
+  #carouselExampleIndicators {
+    max-width: 900px;
+    margin: 30px auto;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .carousel-inner {
+    border-radius: 8px;
+  }
+  
+  .carousel-item {
+    text-align: center;
+    background-color: #282828;
+    height: 450px;
+  }
+  
+  .carousel-item img {
+    max-height: 90%;
+    max-width: 70%;
+    object-fit: contain;
+    padding: 15px;
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 0.375rem; 
+    padding: 1rem; 
+    bottom: 1.25rem; 
+    color: #f5f5f5;
+  }
+  
+  .carousel-caption h5 {
+    color: #f5f5f5;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+  }
+  
+  .carousel-caption p {
+    color: #e0e0e0;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(74, 74, 74, 0.7);
+    border-radius: 50%;
+    padding: 20px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 8%;
+  }
+  
+  .carousel-indicators [data-bs-target] {
+    background-color: #e0e0e0;
+    opacity: 0.5;
+  }
+  
+  .carousel-indicators .active {
+    opacity: 1;
+    background-color: #f5f5f5;
+  }
+  
+  .carousel-caption h5.product-name-carousel {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #ffffff; 
+    margin-bottom: 0.75rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .carousel-caption p.product-price-carousel {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.25rem;
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+  }
+  */
+
+/* ------------------------------------------------------------------ */
+/* --- NUEVOS ESTILOS PARA EL CARRUSEL HORIZONTAL CON SCROLL --- */
+/* ------------------------------------------------------------------ */
+
+.scroll-carousel-container {
+  /* ... */
 }
 
-.card .card-body h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #f5f5f5;
+.scroll-carousel-viewport {
+  display: flex;
+  overflow-x: auto; /* ESTO ES LO QUE PERMITE EL SCROLL Y MOSTRARÁ LA BARRA SI ES NECESARIO */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-scroll-snap-type: x mandatory; 
+  -ms-scroll-snap-type: x mandatory; 
+  padding: 10px 0px 20px 10px; /* El padding-bottom da espacio para la barra */
+  margin-left: -10px; 
+  gap: 1rem; 
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Botón de compra - Usar clases de Bootstrap .btn */
-.btn-btn-primary {
-  background-color: #4a4a4a;
-  color: #f5f5f5;
-  font-size: 14px;
-  padding: 10px 30px;
-  border-radius: 25px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
+/* ELIMINA O COMENTA LAS SIGUIENTES REGLAS PARA MOSTRAR LA BARRA DE SCROLL */
+/*
+.scroll-carousel-viewport::-webkit-scrollbar {
+  display: none; 
 }
-
-.btn-btn-primary:hover {
-  background-color: #6a6a6a;
+.scroll-carousel-viewport {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
 }
+*/
 
-.card .contenido-card {
-  padding: 15px;
-  text-align: center;
-}
-
-.card .contenido-card a {
-  display: inline-block;
-  padding: 10px;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #f5f5f5;
+.scroll-carousel-item {
+  /* ... (tus estilos para los items) ... */
+  flex: 0 0 auto; 
+  width: 280px; 
+  scroll-snap-align: start; 
+  -webkit-scroll-snap-align: start;
+  -ms-scroll-snap-align: start; 
+  background-color: #282828;
   border: 1px solid #4a4a4a;
-  border-radius: 4px;
-  transition: all 400ms ease;
-  margin-bottom: 5px;
+  border-radius: 0.5rem; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-.card .contenido-card a:hover {
-  background: #6a6a6a;
-  color: #f5f5f5;
+.scroll-carousel-item:hover {
+  transform: translateY(-5px);
+  /* Ligero efecto al pasar el mouse */
 }
 
-.button-group span {
-  border: 1px solid #4a4a4a;
-  padding: 0.8rem;
+.product-image-scroll-wrapper {
+  height: 60%;
+  /* Proporción para la imagen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #343a40;
+  /* Un fondo para la imagen si no es transparente */
+}
+
+.product-image-scroll {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-image-scroll-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.4s ease;
+  height: 100%;
+  width: 100%;
+  color: #adb5bd;
+  /* Texto gris claro para el placeholder */
 }
 
-.price {
-  font-size: 1.7rem;
-  font-weight: 600;
-}
-
-.price span {
-  font-size: 1.5rem;
-  font-weight: 400;
-  text-decoration: line-through;
-  color: #e0e0e0;
-  margin-left: 0.5rem;
-}
-
-/* Media Queries para responsividad - Muchas de estas reglas pueden ser reemplazadas por las clases de cuadrícula de Bootstrap */
-@media only screen and (max-width: 780px) {
-  .card {
-    /* width: 100%; - Reemplazado por .col-12 o .col-md-6 */
-    margin: 10px;
-  }
-
-  .card img {
-    height: auto;
-  }
-}
-
-/* Estilos para el carrusel de productos - Se pueden mantener y ajustar con Bootstrap */
-#carouselExampleIndicators {
-  max-width: 900px;
-  margin: 30px auto;
-  border: 1px solid #4a4a4a;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.carousel-inner {
-  border-radius: 8px;
-}
-
-.carousel-item {
+.product-info-scroll {
+  height: 40%;
+  /* Proporción para la información */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Distribuye el espacio: nombre arriba, precio en medio, botón abajo */
+  align-items: center;
   text-align: center;
+  background-color: #212529;
+  /* Un color de fondo ligeramente diferente para la info */
+  border-top: 1px solid #4a4a4a;
+  /* Línea divisoria */
+}
+
+.product-name-scroll {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #f8f9fa;
+  /* Blanco brillante */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.product-price-scroll {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2rem;
+  /* Precio un poco más grande */
+  font-weight: bold;
+  color: #20c997;
+  /* Un color de acento para el precio, ej: verde menta */
+}
+
+.scroll-carousel-item .btn-primary {
+  background-color: #007bff;
+  /* Azul primario de Bootstrap */
+  border-color: #007bff;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  /* width: 80%; /* Que el botón ocupe un buen ancho */
+}
+
+.scroll-carousel-item .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.scroll-carousel-item-empty {
+  flex: 0 0 100%;
+  /* Ocupa todo el ancho si no hay ítems */
   background-color: #282828;
-  display: flex; /* Ya lo está haciendo Bootstrap */
-  justify-content: center; /* Ya lo está haciendo Bootstrap */
-  align-items: center; /* Ya lo está haciendo Bootstrap */
-  height: 450px;
+  border-radius: 8px;
 }
 
-.carousel-item img {
-  max-height: 90%;
-  max-width: 70%;
-  object-fit: contain;
-  padding: 15px;
-}
+/* Ajustes responsivos para el número de ítems visibles (opcional) */
+@media (min-width: 576px) {
 
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.6); /* Reemplazado por .bg-dark .bg-opacity-75 */
-  border-radius: 5px;
-  padding: 10px 15px;
-  bottom: 20px;
-  color: #f5f5f5;
-}
-
-.carousel-caption h5 {
-  color: #f5f5f5;
-  font-size: 1.8rem;
-  margin-bottom: 5px;
-}
-
-.carousel-caption p {
-  color: #e0e0e0;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(74, 74, 74, 0.7);
-  border-radius: 50%;
-  padding: 20px;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 8%;
-}
-
-/* Opcional: Estilos para el botón "Ver Producto" dentro del carrusel */
-.carousel-caption .btn-primary {
-  background-color: #4a4a4a;
-  border-color: #4a4a4a;
-  color: #f5f5f5;
-  padding: 8px 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.carousel-caption .btn-primary:hover {
-  background-color: #6a6a6a;
-  border-color: #6a6a6a;
-}
-
-/* Ajustes para los indicadores del carrusel */
-.carousel-indicators [data-bs-target] {
-  background-color: #e0e0e0;
-  opacity: 0.5;
-}
-
-.carousel-indicators .active {
-  opacity: 1;
-  background-color: #f5f5f5;
-}
-
-/* Media Queries para responsividad */
-@media (max-width: 768px) {
-  #carouselExampleIndicators {
-    max-width: 100%;
-    margin: 20px auto;
-    border-radius: 0;
+  /* sm */
+  .scroll-carousel-item {
+    width: 250px;
   }
+}
 
-  .carousel-item {
-    height: 350px;
+@media (min-width: 768px) {
+
+  /* md */
+  .scroll-carousel-item {
+    width: 280px;
   }
+}
 
-  .carousel-item img {
-    max-width: 80%;
+@media (min-width: 992px) {
+
+  /* lg */
+  .scroll-carousel-item {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  /* xl */
+  .scroll-carousel-item {
+    width: 320px;
   }
 }
