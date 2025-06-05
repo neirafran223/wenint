@@ -3,37 +3,151 @@
 {% load humanize %}
 
 {% block contenido %}
-<div class="scroll-carousel-container container py-5"> {# Añadido container y padding de Bootstrap #}
+<div id="carouselExampleFade" class="carousel slide carousel-fade container py-5" data-bs-ride="carousel" data-bs-interval="1000">
   <h2 class="text-white text-center mb-4">Nuestros Productos Destacados</h2>
-  <div class="scroll-carousel-viewport">
+  <div class="carousel-indicators">
     {% for p in productos %}
-    <div class="scroll-carousel-item" id="producto-scroll-{{ forloop.counter0 }}">
-      <div class="product-image-scroll-wrapper bg-dark">
+    <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for p in productos %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <div class="d-flex justify-content-center align-items-center bg-dark" style="height: 450px; overflow: hidden;">
         {% if p.imagen %}
-        <img src="{{ p.imagen.url }}" 
-             class="product-image-scroll"
-             alt="{{ p.nombre }}">
+        <img class="d-block img-fluid" src="{{ p.imagen.url }}" alt="{{ p.nombre }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
         {% else %}
-        <div class="product-image-scroll-placeholder">
-            <p class="text-white mb-0">Imagen no disponible</p>
-        </div>
+        <img class="d-block img-fluid" src="{% static 'app/img/no_image.png' %}" alt="Imagen no disponible" style="max-height: 100%; max-width: 100%; object-fit: contain;">
         {% endif %}
-      </div>
-      <div class="product-info-scroll p-3">
-        <h5 class="text-white product-name-scroll mb-2">{{ p.nombre | title }}</h5>
-        <p class="text-white product-price-scroll mb-3">${{ p.precio | intcomma }}</p>
-        <a href="{% url 'detalle_producto' p.id %}" class="btn btn-primary btn-sm mt-auto">Ver Producto</a>
       </div>
     </div>
     {% empty %}
-    <div class="scroll-carousel-item-empty">
-      <div class="d-flex justify-content-center align-items-center" style="height: 450px; width:100%;">
-        <p class="text-white">
-          No hay productos disponibles para mostrar.
-        </p>
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-center align-items-center bg-dark text-white" style="height: 450px;">
+        <p>No hay productos destacados para mostrar.</p>
       </div>
     </div>
     {% endfor %}
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+{# Sección: Todos Nuestros Productos (ordenados) #}
+<div class="container py-5">
+    <h2 class="text-white text-center mb-4">Todos Nuestros Productos</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"> {# Grid responsivo #}
+        {% for p in productos %}
+        <div class="col">
+            <div class="card bg-dark text-white h-100 shadow-sm"> {# Usamos clases de card existentes #}
+                <div class="card-img-top-wrapper d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    {% if p.imagen %}
+                    <img src="{{ p.imagen.url }}" class="img-fluid" alt="{{ p.nombre }}" style="object-fit: contain; max-height: 100%; max-width: 100%;">
+                    {% else %}
+                    <img src="{% static 'app/img/no_image.png' %}" class="img-fluid" alt="Imagen no disponible" style="object-fit: contain; max-height: 100%; max-width: 100%;">
+                    {% endif %}
+                </div>
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title text-white mb-2">{{ p.nombre|title }}</h5>
+                    <p class="card-text text-white-50 flex-grow-1">{{ p.descripcion|truncatechars:70 }}</p> {# Descripción corta #}
+                    <p class="card-text text-primary fs-5 fw-bold">${{ p.precio|intcomma }}</p>
+                    <div class="mt-auto">
+                        <a href="{% url 'detalle_producto' p.id %}" class="btn btn-info btn-sm w-100">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                No hay productos disponibles para mostrar.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{# Sección: Preguntas Frecuentes Actualizadas #}
+<div class="container py-5">
+    <h1 class="text-white text-center mb-5">Preguntas Frecuentes</h1>
+
+    <div class="accordion" id="faqAccordion">
+        {# Pregunta 1: Crear cuenta #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    ¿Cómo puedo crear una cuenta en Tecnomarket?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Para crear una cuenta en Tecnomarket, haz clic en "Registrarse" en la barra de navegación superior. Completa el formulario con tus datos y sigue las instrucciones para activar tu cuenta.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 2: Realizar un pedido #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    ¿Cómo realizo un pedido en Tecnomarket?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Navega por nuestros productos, añade los artículos deseados a tu carrito de compras y luego haz clic en "Carrito" para proceder al pago. Sigue los pasos para seleccionar envío y método de pago.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 3: Opciones de envío #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    ¿Cuáles son las opciones de envío disponibles en Tecnomarket?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Ofrecemos envío a domicilio estándar y express. También tienes la opción de retiro en tienda en nuestras sucursales disponibles. Los costos y tiempos varían según tu ubicación.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 4: Seguimiento de pedido #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    ¿Cómo puedo rastrear mi pedido de Tecnomarket?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Una vez que tu pedido sea despachado, recibirás un correo electrónico con un número de seguimiento y un enlace para rastrear el estado de tu envío en tiempo real.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 5: Política de devoluciones #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    ¿Cuál es la política de devoluciones de Tecnomarket?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    En Tecnomarket, aceptamos devoluciones dentro de los 30 días posteriores a la compra, siempre y cuando el producto se encuentre en su empaque original y sin signos de uso. Consulta nuestra sección de Términos y Condiciones para más detalles.
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 {% endblock %}

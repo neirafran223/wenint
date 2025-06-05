@@ -1,0 +1,123 @@
+{% extends 'ventas/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container py-5">
+    <h1 class="text-white text-center mb-5">Preguntas Frecuentes</h1>
+
+    <div class="accordion" id="faqAccordion">
+        {# Pregunta 1 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    ¿Qué es el Cyber de pc Factory?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    El Cyber de PC Factory es un evento de grandes descuentos y ofertas especiales en productos tecnológicos, ideal para encontrar precios increíbles en computadoras, smartphones, componentes y más.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 2 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    ¿Cuándo es el Cyber de pc Factory?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Las fechas del Cyber de PC Factory suelen ser anunciadas con antelación en nuestro sitio web y redes sociales. Generalmente coinciden con los eventos Cyber Monday y Cyber Day a nivel nacional.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 3 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    ¿Qué comprar en Cyber de pc Factory Chile?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Puedes encontrar ofertas en una amplia gama de productos: notebooks, PCs de escritorio, monitores, impresoras, componentes (tarjetas gráficas, procesadores), smartphones, accesorios gamers y mucho más.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 4 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    ¿Cómo puedo comprar en el Cyber de pc Factory?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Para comprar, simplemente navega por nuestras ofertas durante el evento, agrega los productos deseados a tu carrito, y procede al pago. Asegúrate de tener tu información de envío y pago lista.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 5 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    ¿Es seguro comprar en el Cyber de pc Factory?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Sí, comprar en PC Factory es completamente seguro. Contamos con métodos de pago protegidos y protocolos de seguridad para proteger tu información personal y financiera.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 6 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    ¿Qué métodos de pago puedo usar para comprar en Cyber de pc Factory?
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Aceptamos diversas formas de pago, incluyendo tarjetas de crédito (Visa, MasterCard, American Express), débito, y transferencias bancarias. Consulta las opciones específicas durante el proceso de compra.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 7 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    ¿Puedo retirar y retirar en tienda?
+                </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Sí, ofrecemos la opción de retiro en tienda para muchos de nuestros productos. Selecciona esta opción al finalizar tu compra para recoger tu pedido en la sucursal más cercana.
+                </div>
+            </div>
+        </div>
+
+        {# Pregunta 8 #}
+        <div class="accordion-item bg-dark text-white border-secondary mb-2">
+            <h2 class="accordion-header" id="headingEight">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    ¿Cuáles son algunas recomendaciones para comprar en Cyber Day?
+                </button>
+            </h2>
+            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white-50">
+                    Te recomendamos registrarte previamente, tener tus datos de pago actualizados, hacer una lista de deseos, y estar atento a los horarios de lanzamiento de ofertas para aprovechar los mejores descuentos.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

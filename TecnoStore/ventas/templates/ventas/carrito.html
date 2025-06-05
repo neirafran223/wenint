@@ -6,21 +6,14 @@
 <div class="container mt-5">
     <h1 class="text-white mb-4 text-center">Tu Carrito de Compras</h1>
 
-    {# Mensaje de carrito vacío por defecto. Puedes usarlo con lógica Django #}
-    {% comment %}
+    {# Mensaje de carrito vacío que se muestra por lógica Django #}
     {% if not items_en_carrito %}
         <div class="alert alert-info text-center" role="alert">
             ¡Tu carrito está vacío! <a href="{% url 'home' %}" class="alert-link">Explora nuestros productos</a> para empezar a añadir cosas.
         </div>
     {% endif %}
-    {% endcomment %}
 
-    <div class="alert alert-info text-center" role="alert">
-        Tu carrito está vacío. ¡Empieza a añadir productos!
-    </div>
-
-    {# Ejemplo de cómo podrías mostrar los items del carrito con lógica de Django #}
-    {% comment %}
+    {# Lógica para mostrar los items del carrito con lógica de Django #}
     {% if items_en_carrito %}
         <div class="table-responsive">
             <table class="table table-dark table-striped table-hover align-middle">
@@ -46,16 +39,20 @@
                             {% endif %}
                         </td>
                         <td>
-                            <form action="{% url 'actualizar_cantidad_carrito' item.id %}" method="post" class="d-flex">
-                                {% csrf_token %}
-                                <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="form-control form-control-sm w-auto me-2">
-                                <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
-                            </form>
+                            {# Asumiendo que tendrás una URL para actualizar la cantidad. Si no la tienes, esto no funcionará aún #}
+                            {# <form action="{% url 'actualizar_cantidad_carrito' item.id %}" method="post" class="d-flex"> #}
+                                {# {% csrf_token %} #}
+                                <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="form-control form-control-sm w-auto me-2" readonly> {# Pongo readonly temporalmente #}
+                                {# <button type="submit" class="btn btn-primary btn-sm">Actualizar</button> #}
+                            {# </form> #}
+                            {{ item.cantidad }} {# Muestro solo la cantidad por ahora si no hay URL de actualización #}
                         </td>
                         <td>${{ item.producto.precio|intcomma }}</td>
-                        <td>${{ item.cantidad|mul:item.producto.precio|intcomma }}</td> {# Calcula el subtotal #}
+                        <td>${{ item.subtotal|intcomma }}</td> {# <--- CAMBIO AQUÍ: Usamos el subtotal calculado #}
                         <td>
-                            <a href="{% url 'eliminar_item_carrito' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            {# Asumiendo que tendrás una URL para eliminar ítems. Si no la tienes, esto no funcionará aún #}
+                            {# <a href="{% url 'eliminar_item_carrito' item.id %}" class="btn btn-danger btn-sm">Eliminar</a> #}
+                            <button class="btn btn-danger btn-sm" disabled>Eliminar</button> {# Deshabilitado temporalmente #}
                         </td>
                     </tr>
                     {% endfor %}
@@ -66,13 +63,12 @@
         <div class="d-flex justify-content-end align-items-center mt-4 p-3 bg-secondary rounded text-white">
             <h4 class="mb-0 me-3">Total del Carrito:</h4>
             <h3 class="mb-0 text-success">${{ total_carrito|intcomma }}</h3> {# total_carrito debería ser pasado desde la vista #}
-            <a href="{% url 'proceder_al_pago' %}" class="btn btn-success btn-lg ms-4">Proceder al Pago</a>
+            {# Asumiendo que tendrás una URL para proceder al pago #}
+            {# <a href="{% url 'proceder_al_pago' %}" class="btn btn-success btn-lg ms-4">Proceder al Pago</a> #}
+            <button class="btn btn-success btn-lg ms-4" disabled>Proceder al Pago</button> {# Deshabilitado temporalmente #}
         </div>
 
-    {% else %}
-        {# Este bloque de "else" se duplica con el alert de arriba, puedes elegir cuál usar #}
     {% endif %}
-    {% endcomment %}
 
     <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
         <div class="col">

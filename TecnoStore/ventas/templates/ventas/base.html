@@ -17,53 +17,83 @@
 </head>
 
 <body>
-  <header id="header" class="bg-dark text-white py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-      <img src="{% static 'app/img/menuiconwhite.png' %}" alt="menu" class="menu d-md-none" id="menu" />
-      <div class="contenedor_logo">
-        <img src="{% static 'app/img/logo1.png' %}" alt="logo" class="logo" style="width: 100px" />
+  <header id="header" class="bg-dark text-white py-2">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand me-3" href="{% url 'home' %}">
+          <img src="{% static 'app/img/logo1.png' %}" alt="logo" class="logo" style="width: 80px" />
+        </a>
+
+        <div class="dropdown">
+          <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuCategories" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-bars me-2"></i> Categorías
+          </button>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuCategories">
+            <li><a class="dropdown-item text-white-50" href="#">Electrónica</a></li>
+            <li><a class="dropdown-item text-white-50" href="#">Computadoras</a></li>
+            <li><a class="dropdown-item text-white-50" href="#">Smartphones</a></li>
+            <li><a class="dropdown-item text-white-50" href="#">Accesorios</a></li>
+            <li><a class="dropdown-item text-white-50" href="#">Software</a></li>
+            <li><a class="dropdown-item text-white-50" href="#">Componentes</a></li>
+            <li><hr class="dropdown-divider bg-secondary"></li> {# Separador #}
+            <li><h6 class="dropdown-header text-white">Administración</h6></li>
+            {% if perms.app.add_producto %}
+              <li><a class="dropdown-item text-white-50" href="{% url 'agregar_productos' %}">Agregar Producto</a></li>
+            {% endif %}
+            {% if perms.app.view_producto %}
+              <li><a class="dropdown-item text-white-50" href="{% url 'listar_productos'%}">Listar Productos</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-      <nav id="nav" class="d-none d-md-block">
+
+      <form class="d-flex flex-grow-1 mx-3" role="search">
+        <input class="form-control me-2 bg-secondary text-white border-secondary" type="search" placeholder="Buscar productos..." aria-label="Search">
+        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+
+      <div class="d-flex align-items-center">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'home' %}">Inicio</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle fa-lg"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end bg-dark" aria-labelledby="navbarDropdownUser">
+              {% if user.is_authenticated %}
+                <li><a class="dropdown-item text-white-50" href="#">@{{ user.username }}</a></li>
+                <li><hr class="dropdown-divider bg-secondary"></li>
+                <li>
+                  <form id="logout-form-dropdown" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item text-white-50">Cerrar Sesión</button>
+                  </form>
+                </li>
+              {% else %}
+                <li><a class="dropdown-item text-white-50" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li><a class="dropdown-item text-white-50" href="{% url 'registro' %}">Registrarse</a></li>
+              {% endif %}
+            </ul>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'carrito'%}">Carrito</a>
-          </li>
-          {% if perms.app.add_producto %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'agregar_productos' %}">Agregar Producto</a>
-          </li>
-          {% endif %} {% if perms.app.view_producto %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'listar_productos'%}">Listar Productos</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">@{{ user.username }}
+            <a class="nav-link text-white" href="{% url 'carrito'%}">
+              <i class="fas fa-shopping-cart fa-lg"></i>
             </a>
           </li>
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-            <form id="logout-form" method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="nav-link text-white btn btn-link">Cerrar Sesión</button>
-            </form>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'login' %}">Iniciar Sesión</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'registro' %}">Registrarse</a>
-          </li>
-          {% endif %}
         </ul>
-      </nav>
+      </div>
     </div>
   </header>
-
+  {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
   <div id="contenido" class="container my-4">{% block contenido%} {% endblock %}</div>
 
   <footer class="bg-dark text-white py-4">

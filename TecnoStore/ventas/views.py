@@ -107,36 +107,33 @@ def productos(request):
 
 def carrito(request):
     # Lógica para mostrar el carrito de compras del usuario
-    items_en_carrito = []
+    items_para_mostrar_en_carrito = [] # Nueva lista para los datos a mostrar
     total_carrito = 0
 
     if request.user.is_authenticated:
-        # Obtener los items del carrito para el usuario actual
-        # Asumiendo que Carrito.objects.filter(usuario=request.user) devuelve instancias de Carrito
-        # y que ItemCarrito está relacionado con Carrito
         try:
-            # Obtener los items del carrito directamente si tu modelo ItemCarrito tiene una relación directa con el usuario
-            # O si el modelo Carrito es más bien una "sesión" de carrito y ItemCarrito son los productos dentro de esa sesión
-            # Si Carrito es un "header" y ItemCarrito son los "detalles", necesitas un Carrito por usuario.
-            # Según tu models.py, Carrito tiene usuario y producto, lo que es un poco ambiguo.
-            # Vamos a asumir que Carrito es el item individual en el carrito:
-            items_en_carrito = Carrito.objects.filter(usuario=request.user)
-            for item in items_en_carrito:
-                total_carrito += item.producto.precio * item.cantidad
+            items_raw = Carrito.objects.filter(usuario=request.user)
+            for item in items_raw:
+                subtotal = item.producto.precio * item.cantidad # Calculamos el subtotal aquí
+                total_carrito += subtotal
+                items_para_mostrar_en_carrito.append({
+                    'id': item.id,
+                    'producto': item.producto, # Objeto Producto
+                    'cantidad': item.cantidad,
+                    'subtotal': subtotal, # Subtotal ya calculado
+                })
         except Exception as e:
             messages.error(request, f"Error al cargar el carrito: {e}")
-            items_en_carrito = []
+            items_para_mostrar_en_carrito = []
             total_carrito = 0
     else:
         messages.info(request, "Inicia sesión para ver tu carrito.")
-        # Lógica para carrito de sesión si no hay usuario autenticado (más complejo, no se implementará aquí)
 
     context = {
-        'items_en_carrito': items_en_carrito,
+        'items_en_carrito': items_para_mostrar_en_carrito, # Pasamos la nueva lista
         'total_carrito': total_carrito,
     }
     return render(request, 'ventas/carrito.html', context)
-
 # Nueva función de vista para el detalle del producto
 def detalle_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
