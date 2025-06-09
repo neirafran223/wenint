@@ -3,56 +3,49 @@
 {% load humanize %}
 
 {% block contenido %}
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-8">
-            <div class="card bg-secondary text-white shadow-lg">
-                <div class="card-body p-4">
-                    <h2 class="card-title text-center mb-4">{{ producto.nombre|title }}</h2>
-                    <hr class="mb-4 border-light">
-
-                    <div class="row g-4">
-                        <div class="col-12 col-md-6 text-center">
-                            {% if producto.imagen %}
-                                <img src="{{ producto.imagen.url }}" class="img-fluid rounded shadow-sm" alt="{{ producto.nombre }}" style="max-height: 400px; object-fit: contain;">
-                            {% else %}
-                                <img src="{% static 'app/img/no_image.png' %}" class="img-fluid rounded shadow-sm" alt="Imagen no disponible" style="max-height: 400px; object-fit: contain;">
-                            {% endif %}
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <p class="lead">{{ producto.descripcion }}</p>
-                            <p><strong>Marca:</strong> {{ producto.marca|title }}</p>
-                            <p><strong>Stock Disponible:</strong> 
-                                {% if producto.stock > 0 %}
-                                    <span class="badge bg-success">{{ producto.stock }}</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Sin Stock</span>
-                                {% endif %}
-                            </p>
-                            <h3 class="my-3 text-primary">Precio: ${{ producto.precio|intcomma }}</h3>
-
-                            {% if producto.stock > 0 %}
-                                <form action="{% url 'agregar_al_carrito' producto.id %}" method="post" class="mt-4">
-                                    {% csrf_token %}
-                                    <div class="input-group mb-3 w-50">
-                                        <label for="cantidad" class="input-group-text bg-dark text-white">Cantidad:</label>
-                                        <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ producto.stock }}" class="form-control bg-dark text-white border-secondary" aria-label="Cantidad">
-                                    </div>
-                                    <button type="submit" class="btn btn-success btn-lg me-2">
-                                        <i class="fas fa-cart-plus me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <a href="#" class="btn btn-info btn-lg">
-                                        <i class="fas fa-shopping-bag me-2"></i>Comprar Ahora
-                                    </a>
-                                </form>
-                            {% else %}
-                                <button type="button" class="btn btn-secondary btn-lg" disabled>Producto Agotado</button>
-                            {% endif %}
-                        </div>
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="producto-detalle shadow-lg rounded-4 overflow-hidden bg-dark text-light">
+                <div class="text-center p-4">
+                    <h2 class="producto-titulo mb-3">{{ producto.nombre|title }}</h2>
+                    <div class="producto-imagen-wrapper mb-4">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen img-fluid rounded">
+                        {% else %}
+                            <img src="{% static 'app/img/no_image.png' %}" alt="Sin imagen" class="producto-imagen img-fluid rounded">
+                        {% endif %}
                     </div>
-                </div>
-                <div class="card-footer text-end">
-                    <a href="{% url 'home' %}" class="btn btn-outline-light">Volver a la Tienda</a>
+                    <p class="producto-descripcion lead mb-3">{{ producto.descripcion }}</p>
+                    <p><strong>Marca:</strong> {{ producto.marca|title }}</p>
+                    <p><strong>Stock:</strong> 
+                        {% if producto.stock > 0 %}
+                            <span class="badge bg-success">{{ producto.stock }}</span>
+                        {% else %}
+                            <span class="badge bg-danger">Sin stock</span>
+                        {% endif %}
+                    </p>
+                    <h3 class="producto-precio display-6 text-success mb-4">$ {{ producto.precio|intcomma }}</h3>
+
+                    {% if producto.stock > 0 %}
+                        <form method="post" action="{% url 'agregar_al_carrito' producto.id %}" class="mb-4">
+                            {% csrf_token %}
+                            <div class="input-group mb-3 justify-content-center" style="max-width: 200px; margin: auto;">
+                                <span class="input-group-text bg-secondary text-white">Cantidad</span>
+                                <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}" class="form-control bg-dark text-white border-secondary text-center">
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100 mb-2">
+                                <i class="fas fa-cart-plus me-2"></i>Agregar al carrito
+                            </button>
+                            <a href="#" class="btn btn-outline-light w-100">
+                                <i class="fas fa-bolt me-2"></i>Comprar ahora
+                            </a>
+                        </form>
+                    {% else %}
+                        <button class="btn btn-secondary btn-lg w-100 mb-4" disabled>Producto Agotado</button>
+                    {% endif %}
+                    
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">← Volver a la tienda</a>
                 </div>
             </div>
         </div>
